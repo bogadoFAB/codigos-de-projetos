@@ -1,0 +1,87 @@
+
+Aula 14.3 - Implementando múltiplas interfaces
+
+1 - implementar sistema de bonificação do funcionário por meta
+de desempenho cumprida
+
+1.1
+no starUML criou:
+ interface <<PessoaBonificavel>>
+  +calcularBonus(percentualMetaAlcancada: double): double
+
+ classe ServicoPagamentoBonus
+  + pagar(pessoa: PessoaBonificavel, percentualMetaAlcancada: double): void
+
+
+2 - no intellij:
+
+a)
+public class Funcionario implements ClienteFinanciavel, PessoaBonificavel
+
+@Override
+public double calcularBonus(double percentualMetaAlcancada) {
+  return getSalarioMensal() * percentualMetaAlcancada / 100;
+
+
+b)
+public class ServicoPagamentoBonus {
+  
+  public void pagar(PessoaBonificavel pessoa, double percentualMetaAlcancada) {
+    double valorBonus = pessoa.calcularBonus(percentualMetaAlcancada);  
+
+    // aqui entra a lógica de pagamento
+    System.out.printf("DEBUG: Bônus pago no valor de %.2f", valorBonus);
+
+  }
+}
+
+
+c) 10'
+  Criou a classe Principal2
+
+  public static void main(String[] args) {
+    PessoaBonificavel funcionario = new Funcionario("João da Silva", 18_000);
+    //funcionario.calcularBonus(80);
+    
+    ServicoPagamentoBonus servicoPagamentoBonus = new ServicoPagamentoBonus();
+    servicoPagamentoBonus.pagar(funcionario, 80);
+  } 
+
+d) 14' mostra um problema que pode acontecer quando uma classe herda 2 ou mais interfaces
+ 
+  ocorrerá problema se em duas interfaces for implementado um método default com mo mesmo nome
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
